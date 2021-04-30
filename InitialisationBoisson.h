@@ -72,7 +72,7 @@ void initialisationBoisson(){
     /*GIN*/
     gin.prix = 
     gin.contenance =
-    gin.degréAlcool =
+    gin.degréAlcool = 
 
     /*VODKA*/
     vodka.prix = 
