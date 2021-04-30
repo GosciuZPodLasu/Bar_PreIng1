@@ -25,47 +25,47 @@ void initialisationBoisson(){
     /*JUS D'ORANGE*/
     jusorange.prix = 
     jusorange.contenance =
-    jusorange.degréSucre = 
+    jusorange.degréSucre = 	9.6;
 
     /*JUS DE POMME*/
     juspomme.prix = 
     juspomme.contenance =
-    juspomme.degréSucre =
+    juspomme.degréSucre = 9.7;
 
     /*JUS D'ANANAS*/
     jusananas.prix = 
     jusananas.contenance =
-    jusananas.degréSucre =
+    jusananas.degréSucre = 11.6;
 
     /*JUS DE FRAISE*/
     jusfraise.prix = 
     jusfraise.contenance =
-    jusfraise.degréSucre =
+    jusfraise.degréSucre = 9.5;
 
     /*LIMONADE*/
     limonade.prix = 
     limonade.contenance =
-    limonade.degréSucre =
+    limonade.degréSucre = 18;
 
     /*SIROP DE GRENADINE*/
     siropgrenadine.prix = 
     siropgrenadine.contenance =
-    siropgrenadine.degréSucre =
+    siropgrenadine.degréSucre = 82;
 
     /*SIROP DE PECHE*/
     siropeche.prix = 
     siropeche.contenance =
-    siropeche.degréSucre =
+    siropeche.degréSucre = 81;
 
     /*SIROP DE MENTHE*/
     siropmenthe.prix = 
     siropmenthe.contenance =
-    siropmenthe.degréSucre =
+    siropmenthe.degréSucre = 78;
 
     /*PULCO CITRON*/
     pulcocitron.prix = 
     pulcocitron.contenance =
-    pulcocitron.degréSucre =
+    pulcocitron.degréSucre = 31.8;
 
     /*BOISSONS ALCOOLISEES*/
 
