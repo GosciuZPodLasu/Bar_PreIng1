@@ -2,18 +2,6 @@
 #include <stdio.h>
 #include "InitialisationBoisson.h"
 
-typedef struct{
-    float prix;
-    float contenance;
-    int degréAlcool;
-}BoissonAlcoolisee;
-
-typedef struct{
-    float prix;
-    float contenance;
-    int degréSucre;
-}BoissonNonAlcoolisee;
-
 
 
 int main(void){
