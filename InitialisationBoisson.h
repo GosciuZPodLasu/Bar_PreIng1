@@ -31,7 +31,7 @@ void initialisationBoissonNonAlcoolisee(BoissonNonAlcoolisee tabA[N]){
     jusorange.nom = "Jus d'orange";
     jusorange.prix = 1;
     jusorange.contenance = 33;
-    jusorange.degreSucre = 2;
+    jusorange.degreSucre = 9.6;
     jusorange.stock = 1;
     jusorange.stockcocktail = 100;
 
@@ -39,7 +39,7 @@ void initialisationBoissonNonAlcoolisee(BoissonNonAlcoolisee tabA[N]){
     juspomme.nom = "Jus de pomme";
     juspomme.prix = 2;
     juspomme.contenance = 25;
-    juspomme.degreSucre = 1;
+    juspomme.degreSucre = 9.7;
     juspomme.stock = 1;
     juspomme.stockcocktail = 5;
 
@@ -47,7 +47,7 @@ void initialisationBoissonNonAlcoolisee(BoissonNonAlcoolisee tabA[N]){
     jusananas.nom = "Jus d'ananas";
     jusananas.prix = 4;
     jusananas.contenance = 45;
-    jusananas.degreSucre = 58;
+    jusananas.degreSucre = 11.6;
     jusananas.stock = 1;
     jusananas.stockcocktail = 110;
 
@@ -55,7 +55,7 @@ void initialisationBoissonNonAlcoolisee(BoissonNonAlcoolisee tabA[N]){
     jusfraise.nom = "Jus de fraise";
     jusfraise.prix = 4;
     jusfraise.contenance = 221;
-    jusfraise.degreSucre = 2;
+    jusfraise.degreSucre = 9.5;
     jusfraise.stock = 1;
     jusfraise.stockcocktail = 14;
 
@@ -63,7 +63,7 @@ void initialisationBoissonNonAlcoolisee(BoissonNonAlcoolisee tabA[N]){
     limonade.nom = "Limonade";
     limonade.prix = 1;
     limonade.contenance = 2;
-    limonade.degreSucre = 4;
+    limonade.degreSucre = 18;
     limonade.stock = 1;
     limonade.stockcocktail = 32;
 
@@ -71,7 +71,7 @@ void initialisationBoissonNonAlcoolisee(BoissonNonAlcoolisee tabA[N]){
     siropgrenadine.nom = "Sirop de grenadine";
     siropgrenadine.prix = 4; 
     siropgrenadine.contenance = 1;
-    siropgrenadine.degreSucre = 2;
+    siropgrenadine.degreSucre = 82;
     siropgrenadine.stock = 1;
     siropgrenadine.stockcocktail = 3;
 
@@ -79,7 +79,7 @@ void initialisationBoissonNonAlcoolisee(BoissonNonAlcoolisee tabA[N]){
     siroppeche.nom = "Sirop de peche";
     siroppeche.prix = 4;
     siroppeche.contenance = 21;
-    siroppeche.degreSucre = 10;
+    siroppeche.degreSucre = 81;
     siroppeche.stock = 1;
     siroppeche.stockcocktail = 2;
 
@@ -87,7 +87,7 @@ void initialisationBoissonNonAlcoolisee(BoissonNonAlcoolisee tabA[N]){
     siropmenthe.nom = "Sirop de menthe";
     siropmenthe.prix = 13;
     siropmenthe.contenance = 2;
-    siropmenthe.degreSucre = 1;
+    siropmenthe.degreSucre = 78;
     siropmenthe.stock = 1;
     siropmenthe.stockcocktail = 210;
 
@@ -95,7 +95,7 @@ void initialisationBoissonNonAlcoolisee(BoissonNonAlcoolisee tabA[N]){
     pulcocitron.nom = "Pulco citron";
     pulcocitron.prix = 6;
     pulcocitron.contenance = 5;
-    pulcocitron.degreSucre = 4;
+    pulcocitron.degreSucre = 31.8;
     pulcocitron.stock = 1;
     pulcocitron.stockcocktail = 1;
 
