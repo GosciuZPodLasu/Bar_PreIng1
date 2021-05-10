@@ -1,122 +1,222 @@
 #include <stdlib.h>
 #include <stdio.h>
-
+#define N 10
+#define T 10
 
 typedef struct{
-    float prix;
-    float contenance;
-    int degréSucre;
+    char* nom; //Nom de la boisson
+    float prix; //Prix d'une boisson
+    float contenance; //Contenance de la boisson en cl = un verre
+    int degreSucre; //Degré de sucre dans la boisson en g/cl
+    int stock;  //Nombre de boissons disponibles
+    float stockcocktail; //Total de la contenance disponible d'une boisson en cl
 }BoissonNonAlcoolisee;
 
 typedef struct{
-    float prix;
-    float contenance;
-    int degréAlcool;
+    char* nom; //Nom de l'alcool
+    float prix; //Prix d'un alcool
+    float contenance; //Contenance de l'alcool en cl = un verre
+    int degreAlcool; //Degré d'alcool en °
+    int stock; //Nombre de portions disponibles 
+    float stockcocktail; //Total de la contenance d'un alcool disponible en cl
 }BoissonAlcoolisee;
 
 
-void initialisationBoisson(){
-    BoissonNonAlcoolisee jusorange, juspomme, jusananas, jusfraise, limonade, siropgrenadine, pulcocitron, siropeche, siropmenthe;
-    BoissonAlcoolisee gin, vodka, rhum, tequila, malibu, whisky, champagne, bourbon, rosé, triplesec;
-
+void initialisationBoissonNonAlcoolisee(BoissonNonAlcoolisee tabA[N]){
+    BoissonNonAlcoolisee jusorange, juspomme, jusananas, jusfraise, limonade, siropgrenadine, pulcocitron, siroppeche, siropmenthe, coca;
 
     /*BOISSONS NON ALCOOLISEES*/
 
     /*JUS D'ORANGE*/
-    jusorange.prix = 
-    jusorange.contenance =
-    jusorange.degréSucre = 	9.6;
+    jusorange.nom = "Jus d'orange";
+    jusorange.prix = 1;
+    jusorange.contenance = 33;
+    jusorange.degreSucre = 2;
+    jusorange.stock = 1;
+    jusorange.stockcocktail = 100;
 
     /*JUS DE POMME*/
-    juspomme.prix = 
-    juspomme.contenance =
-    juspomme.degréSucre = 9.7;
+    juspomme.nom = "Jus de pomme";
+    juspomme.prix = 2;
+    juspomme.contenance = 25;
+    juspomme.degreSucre = 1;
+    juspomme.stock = 1;
+    juspomme.stockcocktail = 5;
 
     /*JUS D'ANANAS*/
-    jusananas.prix = 
-    jusananas.contenance =
-    jusananas.degréSucre = 11.6;
+    jusananas.nom = "Jus d'ananas";
+    jusananas.prix = 4;
+    jusananas.contenance = 45;
+    jusananas.degreSucre = 58;
+    jusananas.stock = 1;
+    jusananas.stockcocktail = 110;
 
     /*JUS DE FRAISE*/
-    jusfraise.prix = 
-    jusfraise.contenance =
-    jusfraise.degréSucre = 9.5;
+    jusfraise.nom = "Jus de fraise";
+    jusfraise.prix = 4;
+    jusfraise.contenance = 221;
+    jusfraise.degreSucre = 2;
+    jusfraise.stock = 1;
+    jusfraise.stockcocktail = 14;
 
     /*LIMONADE*/
-    limonade.prix = 
-    limonade.contenance =
-    limonade.degréSucre = 18;
+    limonade.nom = "Limonade";
+    limonade.prix = 1;
+    limonade.contenance = 2;
+    limonade.degreSucre = 4;
+    limonade.stock = 1;
+    limonade.stockcocktail = 32;
 
     /*SIROP DE GRENADINE*/
-    siropgrenadine.prix = 
-    siropgrenadine.contenance =
-    siropgrenadine.degréSucre = 82;
+    siropgrenadine.nom = "Sirop de grenadine";
+    siropgrenadine.prix = 4; 
+    siropgrenadine.contenance = 1;
+    siropgrenadine.degreSucre = 2;
+    siropgrenadine.stock = 1;
+    siropgrenadine.stockcocktail = 3;
 
     /*SIROP DE PECHE*/
-    siropeche.prix = 
-    siropeche.contenance =
-    siropeche.degréSucre = 81;
+    siroppeche.nom = "Sirop de peche";
+    siroppeche.prix = 4;
+    siroppeche.contenance = 21;
+    siroppeche.degreSucre = 10;
+    siroppeche.stock = 1;
+    siroppeche.stockcocktail = 2;
 
     /*SIROP DE MENTHE*/
-    siropmenthe.prix = 
-    siropmenthe.contenance =
-    siropmenthe.degréSucre = 78;
+    siropmenthe.nom = "Sirop de menthe";
+    siropmenthe.prix = 13;
+    siropmenthe.contenance = 2;
+    siropmenthe.degreSucre = 1;
+    siropmenthe.stock = 1;
+    siropmenthe.stockcocktail = 210;
 
     /*PULCO CITRON*/
-    pulcocitron.prix = 
-    pulcocitron.contenance =
-    pulcocitron.degréSucre = 31.8;
+    pulcocitron.nom = "Pulco citron";
+    pulcocitron.prix = 6;
+    pulcocitron.contenance = 5;
+    pulcocitron.degreSucre = 4;
+    pulcocitron.stock = 1;
+    pulcocitron.stockcocktail = 1;
+
+    /*COCA*/
+    coca.nom = "Coca";
+    coca.prix = 1;
+    coca.contenance = 33;
+    coca.degreSucre = 4;
+    coca.stock = 1;
+    coca.stockcocktail = 2;
+
+    /*Affectation des cases du tableau pour chaque boisson*/
+    tabA[0] = jusorange;
+    tabA[1] = juspomme;
+    tabA[2] = jusananas;
+    tabA[3] = jusfraise;
+    tabA[4] = limonade;
+    tabA[5] = siropgrenadine;
+    tabA[6] = siroppeche;
+    tabA[7] = siropmenthe;
+    tabA[8] = pulcocitron;
+    tabA[9] = coca;
+    
+}
+
+void  initialisationBoissonAlcoolisee(BoissonAlcoolisee tabB[T]){
+    BoissonAlcoolisee gin, vodka, rhum, tequila, malibu, whisky, champagne, bourbon, rose, triplesec;
+
 
     /*BOISSONS ALCOOLISEES*/
 
     /*GIN*/
-    gin.prix = 
-    gin.contenance =
-    gin.degréAlcool = 
+    gin.nom = "Gin";
+    gin.prix = 12;
+    gin.contenance = 21;
+    gin.degreAlcool = 24;
+    gin.stock = 12;
+    gin.stockcocktail = 12;
 
     /*VODKA*/
-    vodka.prix = 
-    vodka.contenance =
-    vodka.degréAlcool =
+    vodka.nom = "Vodka";
+    vodka.prix = 12;
+    vodka.contenance = 20;
+    vodka.degreAlcool = 45;
+    vodka.stock = 14;
+    vodka.stockcocktail = 120;
 
     /*RHUM*/
-    rhum.prix = 
-    rhum.contenance =
-    rhum.degréAlcool =
+    rhum.nom = "Rhum";
+    rhum.prix = 14;
+    rhum.contenance = 21;
+    rhum.degreAlcool = 22;
+    rhum.stock = 0;
+    rhum.stockcocktail = 12;
 
     /*TEQUILA*/
-    tequila.prix = 
-    tequila.contenance =
-    tequila.degréAlcool =
+    tequila.nom = "Tequila";
+    tequila.prix = 57;
+    tequila.contenance = 12;
+    tequila.degreAlcool = 12;
+    tequila.stock = 1;
+    tequila.stockcocktail = 12;
 
     /*MALIBU*/
-    malibu.prix = 
-    malibu.contenance =
-    malibu.degréAlcool =
+    malibu.nom = "Malibu";
+    malibu.prix = 12;
+    malibu.contenance = 14;
+    malibu.degreAlcool = 54;
+    malibu.stock = 0;
+    malibu.stockcocktail = 21;
 
     /*WHISKY*/
-    whisky.prix = 
-    whisky.contenance =
-    whisky.degréAlcool =
+    whisky.nom = "Whisky";
+    whisky.prix = 45;
+    whisky.contenance = 10;
+    whisky.degreAlcool = 50;
+    whisky.stock = 0;
+    whisky.stockcocktail = 0;
 
     /*CHAMPAGNE*/
-    champagne.prix = 
-    champagne.contenance =
-    champagne.degréAlcool =
+    champagne.nom = "Champagne";
+    champagne.prix = 41;
+    champagne.contenance = 12;
+    champagne.degreAlcool = 12;
+    champagne.stock = 45;
+    champagne.stockcocktail = 12;
 
     /*BOURBON*/
-    bourbon.prix = 
-    bourbon.contenance =
-    bourbon.degréAlcool =
+    bourbon.nom = "Bourbon";
+    bourbon.prix = 12;
+    bourbon.contenance = 41;
+    bourbon.degreAlcool = 12;
+    bourbon.stock = 34;
+    bourbon.stockcocktail = 2;
 
     /*ROSE*/
-    rosé.prix = 
-    rosé.contenance =
-    rosé.degréAlcool =
+    rose.nom = "Rose";
+    rose.prix =  12;
+    rose.contenance = 12;
+    rose.degreAlcool = 64;
+    rose.stock = 2;
+    rose.stockcocktail = 20;
 
     /*TRIPLE SEC*/
-    triplesec.prix = 
-    triplesec.contenance =
-    triplesec.degréAlcool =
+    triplesec.nom = "Triple Sec";
+    triplesec.prix = 45;
+    triplesec.contenance = 121;
+    triplesec.degreAlcool = 12;
+    triplesec.stock = 1;
+    triplesec.stockcocktail = 2;
 
+    /*Affectation des cases du tableau pour chaque boisson*/
+    tabB[0] = gin;
+    tabB[1] = vodka;
+    tabB[2] = rhum;
+    tabB[3] = tequila;
+    tabB[4] = malibu;
+    tabB[5] = whisky;
+    tabB[6] = champagne;
+    tabB[7] = bourbon;
+    tabB[8] = rose;
+    tabB[9] = triplesec;
+        
 }
