@@ -1,11 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "affichage.h"
+#include "commande.h"
+#include "commandecocktail.h"
+
+typedef struct{
+    int nomBoisson;
+    int Cocktailverif;
+    Cocktail Cocktail;
+}panier;
+
 
 void Client();
 void Barman();
 
-void choixPerso(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[T]){
+void choixPerso(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[N]){
     int choix;
     printf("~ ~ ~ ~ Bienvenue au bar a cocktail ! ~ ~ ~ ~\n\n");
     printf("Choisissez votre role :\n\n");
@@ -24,25 +33,35 @@ void choixPerso(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[T]){
     }
 }
 
-void Client(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[T]){
-    int choix;
-
+void Client(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[N]){
+    int choix, a;
+    panier panier[30] = {NULL};
     printf("\nQue souhaitez-vous faire ?\n");
-    printf("     1. Commander une boisson\n");
+    printf("     1. Commander une boisson [Limite = 30/client]\n");
     printf("     2. Creer un cocktail\n");
     scanf("%d", &choix);
 
     switch(choix){
         case 1 :
             affichageClient(tabA, tabB);
+            commande(tabA, tabB, panier);
         break;
         case 2 :
-
+            affichageClient(tabA, tabB);
+            commande_cocktail(tabA, tabB, panier);
         break;
     }
+    a = validation(panier);
+    switch (a){
+        case 1 :
+            Client(tabA, tabB);
+        default:
+        break;
+    }
+    
 }
 
-void Barman(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[T]){
+void Barman(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[N]){
     int choix;
 
     printf("\nQue souhaitez-vous faire ?\n");
@@ -60,6 +79,7 @@ void Barman(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[T]){
         break;
         case 3 :
             affichageBarman(tabA, tabB);
+            
         break;
         case 4 :
 

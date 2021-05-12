@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #define N 10
-#define T 10
 
 typedef struct{
     char* nom; //Nom de la boisson
@@ -20,6 +19,16 @@ typedef struct{
     int stock; //Nombre de portions disponibles 
     float stockcocktail; //Total de la contenance d'un alcool disponible en cl
 }BoissonAlcoolisee;
+
+typedef struct{
+    char* nom; //Nom du cocktail
+    float prix; //Prix d'un cocktail
+    float contenance; //Contenance de le cocktail en cl = un verre
+    int degreAlcool; //Degré de sucre dans le cocktail en g/cl
+    int degreSucre; //Degré de sucre dans le cocktail en g/cl
+    int stock;  //Nombre de cocktails disponibles
+    float stockcocktail; //Total de la contenance disponible d'un cocktail en cl
+}Cocktail;
 
 
 void initialisationBoissonNonAlcoolisee(BoissonNonAlcoolisee tabA[N]){
@@ -121,7 +130,7 @@ void initialisationBoissonNonAlcoolisee(BoissonNonAlcoolisee tabA[N]){
     
 }
 
-void  initialisationBoissonAlcoolisee(BoissonAlcoolisee tabB[T]){
+void  initialisationBoissonAlcoolisee(BoissonAlcoolisee tabB[N]){
     BoissonAlcoolisee gin, vodka, rhum, tequila, malibu, whisky, champagne, bourbon, rose, triplesec;
 
 

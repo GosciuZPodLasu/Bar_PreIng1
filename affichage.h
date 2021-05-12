@@ -1,14 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void affichageClient(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[T]){
+
+void affichageClient(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[N]){
     printf("  __                              _      _  __  __    \n");
     printf(" / _)  ' _  _      _   _ _    _  /_| /  / )/  )/  )/  \n");
     printf("/(_)()/_) _) ()/)_)  _) (//)_)  (  |(__(__(__/(__/(__ \n");
     for (int i = 0; i<N; i++){
         if(tabA[i].stock > 0){
         puts("\n");
-        printf("%s""   %f Euros\n",tabA[i].nom, tabA[i].prix);
+        printf("%s [%d]""   %f Euros\n",tabA[i].nom, i, tabA[i].prix);
         printf("%f cl, %d g/cl\n", tabA[i].contenance, tabA[i].degreSucre);  
         } 
     }
@@ -16,23 +17,23 @@ void affichageClient(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[T]){
     printf("  _      _  __  __     __ \n");
     printf(" /_| /  / )/  )/  )/  (   \n");
     printf("(  |(__(__(__/(__/(____)  \n");
-    for (int j = 0; j<T; j++){
+    for (int j = 0; j<N; j++){
         if(tabB[j].stock > 0){
         puts("\n");
-        printf("%s""   %f Euros\n",tabB[j].nom, tabB[j].prix);
+        printf("%s [%d]""   %f Euros\n",tabB[j].nom, j+10, tabB[j].prix);
         printf("%f cl, Degre : %d %%\n", tabB[j].contenance, tabB[j].degreAlcool);  
         } 
     }
 }
 
 
-void affichageBarman(BoissonNonAlcoolisee tabA[], BoissonAlcoolisee tabB[]){
+void affichageBarman(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[N]){
     printf("  __                              _      _  __  __    \n");
     printf(" / _)  ' _  _      _   _ _    _  /_| /  / )/  )/  )/  \n");
     printf("/(_)()/_) _) ()/)_)  _) (//)_)  (  |(__(__(__/(__/(__ \n");
     for (int i = 0; i<N; i++){
         puts("\n");
-        printf("%s""   %f Euros\n",tabA[i].nom, tabA[i].prix);
+        printf("%s [%d]""   %f Euros\n",tabA[i].nom, i, tabA[i].prix);
         printf("%f cl, %d g/cl\n", tabA[i].contenance, tabA[i].degreSucre);
         printf("Stock : %d    Stock cocktail : %f", tabA[i].stock, tabA[i].stockcocktail);  
     }
@@ -40,9 +41,9 @@ void affichageBarman(BoissonNonAlcoolisee tabA[], BoissonAlcoolisee tabB[]){
     printf("  _      _  __  __     __ \n");
     printf(" /_| /  / )/  )/  )/  (   \n");
     printf("(  |(__(__(__/(__/(____)  \n");
-    for (int j = 0; j<T; j++){
+    for (int j = 0; j<N; j++){
         puts("\n");
-        printf("%s""   %f Euros\n",tabB[j].nom, tabB[j].prix);
+        printf("%s [%d]""   %f Euros\n",tabB[j].nom, j+10, tabB[j].prix);
         printf("%f cl, Degre : %d %%\n", tabB[j].contenance, tabB[j].degreAlcool);
         printf("Stock : %d    Stock cocktail : %f", tabB[j].stock, tabB[j].stockcocktail); 
     }

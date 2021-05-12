@@ -7,9 +7,10 @@
 int main(void){
     BoissonNonAlcoolisee tabA[N];
     initialisationBoissonNonAlcoolisee(tabA);
-    BoissonAlcoolisee tabB[T];
+    BoissonAlcoolisee tabB[N];
     initialisationBoissonAlcoolisee(tabB);
     choixPerso(tabA, tabB);
+    
 }
 
 
