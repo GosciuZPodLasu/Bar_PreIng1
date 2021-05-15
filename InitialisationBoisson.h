@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #define N 10
+#define TailleMAX 2000
 
 typedef struct{
     char* nom; //Nom de la boisson
@@ -21,15 +23,43 @@ typedef struct{
 }BoissonAlcoolisee;
 
 typedef struct{
-    char* nom; //Nom du cocktail
-    float prix; //Prix d'un cocktail
-    float contenance; //Contenance de le cocktail en cl = un verre
-    int degreAlcool; //Degré de sucre dans le cocktail en g/cl
-    int degreSucre; //Degré de sucre dans le cocktail en g/cl
-    int stock;  //Nombre de cocktails disponibles
-    float stockcocktail; //Total de la contenance disponible d'un cocktail en cl
+    int Boisson1;
+    int Boisson2;
+    int Boisson3;
+    int numcocktail;
 }Cocktail;
 
+
+typedef struct{
+    int Boisson;
+    float prix;
+    Cocktail Cocktail;
+}panier;
+
+/*
+void test(BoissonNonAlcoolisee tabA[]){
+    BoissonNonAlcoolisee jusorange;
+    FILE *f = NULL;
+    char c[TailleMAX];
+    f = fopen("jusorange.txt", "r");
+    printf("i");
+    if (f != NULL){
+        while(fgets(c, TailleMAX, f) != NULL){
+            printf("%s", c);
+        }
+        fclose(f);
+    }
+    if(f != NULL){
+        printf("d");
+        fscanf(f, "%s %f %f %f %d %f", tabA[0].nom, &tabA[0].prix, &tabA[0].contenance, &tabA[0].degreSucre, &tabA[0].stock, &tabA[0].stockcocktail);
+        printf("p");
+        fclose(f);
+    }
+    printf("g");
+    printf("%s", tabA[0].nom);
+    printf("%f", tabA[0].degreSucre);
+}
+*/
 
 void initialisationBoissonNonAlcoolisee(BoissonNonAlcoolisee tabA[N]){
     BoissonNonAlcoolisee jusorange, juspomme, jusananas, jusfraise, limonade, siropgrenadine, pulcocitron, siroppeche, siropmenthe, coca;
