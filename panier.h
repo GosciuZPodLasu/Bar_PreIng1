@@ -24,18 +24,22 @@ int PanierBoisson(BoissonNonAlcoolisee tabA[N],BoissonAlcoolisee tabB[N], panier
         }
     }
     panier[0].prix = prix1;
-    printf("\nPrix des boissons : %f\n", panier[0].prix);
+    printf("\nPrix des boissons : %f Euros\n", panier[0].prix);
     return compteur;
 }
 
 
 void PanierCocktail(panier panier[30], int numerococktail){
+    float prix = 0;
     printf("\nCocktails :\n");
     for (int i = 0; i<numerococktail; i++){
         if(panier[i].Cocktail.numcocktail != 4430){
             printf("Cocktail %d\n",i+1);
+            prix = prix + panier[i].Cocktail.prix;
         }
     }
+    panier[1].prix = prix;
+    printf("\nPrix des cocktails : %f Euros\n", prix);
 }
 
 
@@ -50,8 +54,9 @@ int validation(BoissonNonAlcoolisee tabA[N],BoissonAlcoolisee tabB[N],panier pan
     scanf("%d", &a);
     switch (a){
         case 1 :
-            printf("Total de votre panier : %f euros", panier[0].prix);
-            return 0;
+            panier[2].prix = panier[0].prix + panier[1].prix;
+            printf("Total de votre panier : %f euros\n", panier[2].prix);
+            return 3;
         break;
         case 2 :
             printf("\nBoisson[Tappez 1] ou cocktail[Tappez 2] ?\n");
@@ -85,12 +90,9 @@ int validation(BoissonNonAlcoolisee tabA[N],BoissonAlcoolisee tabB[N],panier pan
             return 1;
         break;
         case 5 :
-            exit(EXIT_SUCCESS);
-        break;
+            return 4;
         default :
-            printf("Choisissez entre 1 et 3");
-            validation(tabA, tabB, panier, j, numerococktail);
-            return 0;
+            return 5;
         break;
     }
 }

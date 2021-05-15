@@ -45,6 +45,8 @@ void print(BoissonNonAlcoolisee tabA[N],BoissonAlcoolisee tabB[N]){
 
 int commande_cocktail(BoissonNonAlcoolisee tabA[N],BoissonAlcoolisee tabB[N], panier panier[30], int numerococktail){
     int nombre, b, compteur;
+    float prix = 0;
+    int stock = 0;
     printf("\nTu as choisi un Cocktail, tu peux faire une combinaison de maximum 3 boissons\n");
     printf("Combien de boissons ? [Entre 2 et 3] : \n");
     scanf("%d",&nombre);
@@ -53,11 +55,11 @@ int commande_cocktail(BoissonNonAlcoolisee tabA[N],BoissonAlcoolisee tabB[N], pa
         commande_cocktail(tabA, tabB, panier, numerococktail);
         return 0;
     }
-    printf("Tu as choisi de faire une combinaison de %d boissons.\nTu as le choix parmis ces boissons : \n", nombre);
+    printf("Tu as choisi de faire une combinaison de %d boissons.\nTu as le choix parmis ces boissons : \n\n", nombre);
     print(tabA,tabB);
     int ChoixMix[nombre], verif=0,choix,erreur;
     while(verif!=nombre){
-        printf("Quelle est ta boisson numero %d ? : ",(verif+1));
+        printf("\nQuelle est ta boisson numero %d ? : ",(verif+1));
         scanf("%d",&choix);
         erreur=0;
         for(int i=0;i<=verif;i++){
@@ -71,10 +73,28 @@ int commande_cocktail(BoissonNonAlcoolisee tabA[N],BoissonAlcoolisee tabB[N], pa
             verif++;
         }      
     }
-    panier[numerococktail].Cocktail.Boisson1 = ChoixMix[0];
-    panier[numerococktail].Cocktail.Boisson2 = ChoixMix[1];
-    panier[numerococktail].Cocktail.Boisson3 = ChoixMix[2];
-    panier[numerococktail].Cocktail.numcocktail = numerococktail;
+    panier[numerococktail-1].Cocktail.Boisson1 = ChoixMix[0];
+    panier[numerococktail-1].Cocktail.Boisson2 = ChoixMix[1];
+    panier[numerococktail-1].Cocktail.Boisson3 = ChoixMix[2];
+    panier[numerococktail-1].Cocktail.numcocktail = numerococktail;
+    for (int j = 0; j<verif; j++){
+        b = ChoixMix[j];
+        if (b>9 && b<20){
+            printf("\nCombien de cl de %s souhaitez-vous dans votre cocktail\n", tabB[b-10].nom);
+            scanf("%d", &stock);
+            tabB[b-10].stock = tabB[b-10].stock - stock;
+            prix = prix + tabB[b-10].prix;
+
+        }else{
+            printf("\nCombien de cl de %s souhaitez-vous dans votre cocktail \n", tabA[b].nom);
+            scanf("%d", &stock);
+            tabB[b-10].stock = tabB[b-10].stock - stock;
+            prix = prix + tabA[b].prix;
+        }
+    }
+    prix = prix * 1.10;
+    panier[numerococktail-1].Cocktail.prix = prix;
+    printf("\nLe prix de ce cocktail est de %f Euros\n", prix);
     printf("Voici votre cocktail personnalise numero %d compose de : \n", numerococktail);
     for(int i=0;i<nombre;i++){
         b = ChoixMix[i];

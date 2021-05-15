@@ -27,6 +27,7 @@ typedef struct{
     int Boisson2;
     int Boisson3;
     int numcocktail;
+    float prix;
 }Cocktail;
 
 
