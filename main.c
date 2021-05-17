@@ -6,13 +6,23 @@
 
 int main(void){
     float CA = 0;
+
     BoissonNonAlcoolisee tabA[N];
+    char* nom = "BoissonNonAlcoolisee.txt";
+    inistock1(tabA, nom);
     initialisationBoissonNonAlcoolisee(tabA);
+    inistock1(tabA, nom);
+
+
     BoissonAlcoolisee tabB[N];
+    char* nom2 = "BoissonAlcoolisee.txt";
+    inistock2(tabB, nom2);
     initialisationBoissonAlcoolisee(tabB);
+    inistock2(tabB, nom2);
+
     panier panier[30] = {0};
     choixPerso(tabA, tabB, panier, CA);
-    
+    return 0;
 }
 
 
@@ -25,9 +35,9 @@ int main(void){
 - Affichage du chiffre d'affaire pour le barman
 - Calcul du prix d'un cocktail en fonction des degrés et contenances en majorant le prix de 10% du total du prix des boissons comprises dans le cocktail
 
-*Cocktail du jour*
+**Cocktail du jour**
 *Limite taille cocktail*
 *prendre en compte le stock affichage cocktail*
-*Fichiers txt = initialiser tableaux de structure*
+*stock cocktail dans la preparation cocktail*
 *Préparation cocktail prédéfini pour barman*
 */

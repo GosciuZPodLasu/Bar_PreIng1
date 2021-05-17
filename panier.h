@@ -95,6 +95,7 @@ int validation(BoissonNonAlcoolisee tabA[N],BoissonAlcoolisee tabB[N],panier pan
             return 5;
         break;
     }
+    return 0;
 }
 
 /*

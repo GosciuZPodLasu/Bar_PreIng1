@@ -4,7 +4,6 @@
 #include "panier.h"
 #include "stock.h"
 
-
 void Client(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[N], panier panier[30], float CA);
 void Barman(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[N], panier panier[30], float CA);
 
@@ -32,7 +31,7 @@ void Client(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[N], panier pani
     float prix;
     int j = 0;
     printf("\nQue souhaitez-vous faire ?\n");
-    printf("     1. Commander une boisson [Limite = 30/client]\n");
+    printf("     1. Commander une boisson ou un cocktail [Limite = 30/client]\n");
     printf("     2. Creer un cocktail\n");
     printf("     3. Changer de personnage = Barman\n");
     printf("     4. Quitter\n");

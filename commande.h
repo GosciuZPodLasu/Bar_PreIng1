@@ -108,3 +108,56 @@ int commande_cocktail(BoissonNonAlcoolisee tabA[N],BoissonAlcoolisee tabB[N], pa
     }
     return 0;
 }
+/*
+int preparationcocktail(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[N], Cocktail tabC[N]){
+    int nombre;
+    printf("Bienvenue dans l'interface de preparation de cocktails !\n");
+    printf("Choisissez 2 ou 3 boissons pour préparer un cocktail\n");
+    scanf("%d",&nombre);
+    if(nombre<2 || nombre>3){
+        printf("Tu n'as pas choisi le bon nombre de boissons !\nEssaie une deuxieme fois.\n");
+        preparationcocktail(tabA, tabB,);
+        return 0;
+    }
+    print(tabA, tabB);
+    printf("Tu as choisi de faire une combinaison de %d boissons.\nTu as le choix parmis ces boissons : \n\n", nombre);
+    print(tabA,tabB);
+    int ChoixMix[nombre], verif=0,choix,erreur;
+    while(verif!=nombre){
+        printf("\nQuelle est la boisson numero %d ? : ",(verif+1));
+        scanf("%d",&choix);
+        erreur=0;
+        for(int i=0;i<=verif;i++){
+            if (ChoixMix[i]==choix){
+                printf("Tu ne peux pas choisir la meme boisson deux fois\n");
+                erreur++;
+            }
+        }
+        if(erreur==0){
+            ChoixMix[verif]=choix;
+            verif++;
+        }      
+    }
+
+    for (int j = 0; j<verif; j++){
+        b = ChoixMix[j];
+        if (b>9 && b<20){
+            printf("\nCombien de cl de %s souhaitez-vous dans ce cocktail\n", tabB[b-10].nom);
+            scanf("%d", &stock);
+            tabB[b-10].stock = tabB[b-10].stock - stock;
+            prix = prix + tabB[b-10].prix;
+
+        }else{
+            printf("\nCombien de cl de %s souhaitez-vous dans ce cocktail \n", tabA[b].nom);
+            scanf("%d", &stock);
+            tabB[b-10].stock = tabB[b-10].stock - stock;
+            prix = prix + tabA[b].prix;
+        }
+    }
+    prix = prix * 1.10;
+    panier[numerococktail-1].Cocktail.prix = prix;
+
+    
+
+}
+*/

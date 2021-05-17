@@ -11,6 +11,7 @@ float remplirstock(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[N], floa
         printf("Combien de %s voulez vous rajouter ?\n", tabB[s-10].nom);
         scanf("%d", &a);
         tabB[s-10].stock = tabB[s-10].stock + a;
+        tabB[s-10].stockcocktail = tabB[s-10].stock * tabB[s-10].contenance;
         cout = b*tabB[s-10].prix;
     }else{
         if(s > -1 && s < 11){
@@ -18,6 +19,7 @@ float remplirstock(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[N], floa
             printf("Combien de %s voulez vous rajouter ?\n", tabA[s].nom);
             scanf("%d", &b);
             tabA[s].stock = tabA[s].stock + b;
+            tabA[s].stockcocktail = tabA[s].stock * tabA[s].contenance;
             cout = b*tabA[s].prix;
         }else{
             printf("Numero invalide\n");
