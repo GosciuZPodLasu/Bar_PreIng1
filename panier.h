@@ -3,54 +3,60 @@
 #include <stdbool.h>
 #include "commande.h"
 
-int PanierBoisson(BoissonNonAlcoolisee tabA[N],BoissonAlcoolisee tabB[N], panier panier[30], int j){
+int PanierBoisson(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[N], Cocktail tabC[N], panier panier[30], int j){
     int b, compteur;
     float prix1 = 0;
-    printf("Boissons :\n");
+    printf("Boissons/Cocktails :\n");
     if(j > 0){
         for(int i = 0; i<j; i++){  
             if(panier[i].Boisson != 4441){                                                                                       
                 b = panier[i].Boisson;
-                if(b > 9){
+                if(b > 9 && b < 20){
                     compteur = compteur+1; 
                     printf("%d. %s\n", i+1, tabB[b-10].nom);
                     prix1 = prix1 + tabB[b-10].prix;     
                 }else{
-                    compteur = compteur+1;
-                    printf("%d. %s\n", i+1, tabA[b].nom);
-                    prix1 = prix1 + tabA[b].prix;
+                    if (b > 19 && b < 25){
+                        compteur = compteur+1;
+                        printf("%d. %s\n", i+1, tabC[b-20].nom);
+                        prix1 = prix1 + tabC[b-20].prix;
+                    }else{
+                        compteur = compteur+1;
+                        printf("%d. %s\n", i+1, tabA[b].nom);
+                        prix1 = prix1 + tabA[b].prix;
+                    }
                 }
             }
         }
     }
     panier[0].prix = prix1;
-    printf("\nPrix des boissons : %f Euros\n", panier[0].prix);
+    printf("\nPrix des boissons / cocktails : %f Euros\n", panier[0].prix);
     return compteur;
 }
 
 
 void PanierCocktail(panier panier[30], int numerococktail){
     float prix = 0;
-    printf("\nCocktails :\n");
+    printf("\nCocktails personnalises :\n");
     for (int i = 0; i<numerococktail; i++){
         if(panier[i].Cocktail.numcocktail != 4430){
-            printf("Cocktail %d\n",i+1);
+            printf("Cocktail personnalise %d\n",i+1);
             prix = prix + panier[i].Cocktail.prix;
         }
     }
     panier[1].prix = prix;
-    printf("\nPrix des cocktails : %f Euros\n", prix);
+    printf("\nPrix des cocktails personnalises : %f Euros\n", prix);
 }
 
 
-int validation(BoissonNonAlcoolisee tabA[N],BoissonAlcoolisee tabB[N],panier panier[30], int j, int numerococktail){
+int validation(BoissonNonAlcoolisee tabA[N],BoissonAlcoolisee tabB[N], Cocktail tabC[N], panier panier[30], int j, int numerococktail){
     int a, b, c, compteur;
     printf("\nVoici votre panier :\n");
-    compteur = PanierBoisson(tabA, tabB, panier, j);
+    compteur = PanierBoisson(tabA, tabB, tabC, panier, j);
     PanierCocktail(panier, numerococktail);
 
     printf("\nQue voulez vous faire ?\n");
-    printf("     1. Valider votre panier\n     2. Supprimer un element\n     3. Ajouter une boisson\n     4. Ajouter un cocktail\n     5. Annuler votre commande\n");
+    printf("     1. Valider votre panier\n     2. Supprimer un element\n     3. Ajouter une boisson/cocktail\n     4. Ajouter un cocktail personnalise\n     5. Annuler votre commande\n");
     scanf("%d", &a);
     switch (a){
         case 1 :
@@ -65,19 +71,19 @@ int validation(BoissonNonAlcoolisee tabA[N],BoissonAlcoolisee tabB[N],panier pan
                 case 1 :
                     if (compteur == 0){
                         printf("Ton panier est vide, tu ne peux pas supprimer de boissons\n");
-                        validation(tabA, tabB, panier, j-1, numerococktail);
+                        validation(tabA, tabB, tabC, panier, j-1, numerococktail);
                     }
                     printf("\nQuelle boisson voulez vous supprimer ?\n");
                     scanf("%d", &a);
                     panier[a-1].Boisson = 4441;
-                    validation(tabA, tabB, panier, j, numerococktail);
+                    validation(tabA, tabB, tabC, panier, j, numerococktail);
                 break;
                 case 2 :
                     printf("\nQuel cocktail voulez vous supprimer ?\n");
                     scanf("%d", &c);
                     c = c-1;
                     panier[c].Cocktail.numcocktail = 4430;
-                    validation(tabA, tabB, panier, j, numerococktail);
+                    validation(tabA, tabB, tabC, panier, j, numerococktail);
                 break;
                 default :
                 break;

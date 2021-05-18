@@ -22,10 +22,13 @@ typedef struct{
 }BoissonAlcoolisee;
 
 typedef struct{
+    char* nom;
     int Boisson1;
     int Boisson2;
     int Boisson3;
     int numcocktail;
+    float degreSucre;
+    float degreAlcool;
     float prix;
 }Cocktail;
 
@@ -50,7 +53,7 @@ void inistock1(BoissonNonAlcoolisee tabA[N], char* nom){
     sl = atoi(stock[4]); tabA[4].stock = sl;
     sg = atoi(stock[5]); tabA[5].stock = sg;
     spc = atoi(stock[6]); tabA[6].stock = spc;
-    spe = atoi(stock[7]);  tabA[7].stock = spe;
+    spe = atoi(stock[7]); tabA[7].stock = spe;
     sm = atoi(stock[8]); tabA[8].stock = sm;
     scoca = atoi(stock[9]); tabA[9].stock = scoca;
     fclose(f);
@@ -75,7 +78,6 @@ void inistock2(BoissonAlcoolisee tabB[N], char* nom){
     sro = atoi(stock[8]); tabB[8].stock = sro; 
     str = atoi(stock[9]); tabB[9].stock = str;   
 }
-
 
 
 void initialisationBoissonNonAlcoolisee(BoissonNonAlcoolisee tabA[N]){
@@ -261,33 +263,49 @@ void initialisationCocktail(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB
     Cocktail mojito, pinacolada, margarita, cosmopolitan, gintonic;
     
     //MOJITO
+    mojito.nom = "Mojito";
     mojito.prix = (tabA[8].prix + tabA[7].prix + tabB[2].prix) * 1.10;
     mojito.Boisson1 = tabB[2].stockcocktail;
     mojito.Boisson2 = tabA[8].stockcocktail;
     mojito.Boisson3 = tabA[7].stockcocktail;
+    mojito.degreAlcool = tabB[2].degreAlcool;
+    mojito.degreSucre = (tabA[2].degreSucre + tabA[8].degreSucre)/2;
 
     //PINACOLADA
+    pinacolada.nom = "Pina Colada";
     pinacolada.prix = (tabA[2].prix + tabB[2].prix) * 1.10;
     pinacolada.Boisson1 = tabA[2].stockcocktail;
     pinacolada.Boisson2 = tabB[2].stockcocktail;
+    pinacolada.degreAlcool = tabB[2].degreAlcool;
+    pinacolada.degreSucre = tabA[2].degreSucre;
 
     //MARGARITA
+    margarita.nom = "Margarita";
     margarita.prix = (tabA[8].prix + tabB[3].prix + tabB[9].prix) * 1.10;
     margarita.Boisson1 = tabA[8].stockcocktail;
     margarita.Boisson2 = tabB[3].stockcocktail;
     margarita.Boisson3 = tabB[9].stockcocktail;
+    margarita.degreAlcool = (tabB[3].degreAlcool + tabB[9].degreAlcool)/2;
+    margarita.degreSucre = tabA[8].degreSucre;
 
     //COSMOPOLITAN
+    cosmopolitan.nom = "Cosmopolitan";
     cosmopolitan.prix = (tabA[8].prix + tabB[1].prix + tabB[9].prix) * 1.10;
     cosmopolitan.Boisson1 = tabB[1].stockcocktail;
     cosmopolitan.Boisson2 = tabA[8].stockcocktail;
     cosmopolitan.Boisson3 = tabB[9].stockcocktail;
+    cosmopolitan.degreAlcool = (tabB[1].degreAlcool + tabB[9].degreAlcool)/2;
+    cosmopolitan.degreSucre = tabA[8].degreSucre;
 
     //GIN TONIC
+    gintonic.nom = "Gin Tonic";
     gintonic.prix = (tabA[8].prix + tabA[3].prix + tabB[0].prix) * 1.10;
     gintonic.Boisson1 = tabB[0].stockcocktail;
     gintonic.Boisson2 = tabA[3].stockcocktail;
     gintonic.Boisson3 = tabA[8].stockcocktail;
+    gintonic.degreAlcool = tabB[0].degreAlcool;
+    gintonic.degreSucre = (tabA[3].degreSucre + tabA[8].degreSucre)/2;
+
     
     /*Affectation des cases du tableau pour chaque cocktail*/
 
@@ -296,7 +314,5 @@ void initialisationCocktail(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB
     tabC[2] = margarita;
     tabC[3] = cosmopolitan;
     tabC[4] = gintonic;
-
-
 }
 
