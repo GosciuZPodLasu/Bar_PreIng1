@@ -1,6 +1,6 @@
 **********************************JEU DU BAR A COCKTAILS**********************************
 Instructions :
-Vous avez le choix d'incarner soit le barman ou le client pour jouer au jeu?
+Vous avez le choix d'incarner soit le barman ou le client pour jouer au jeu
 Si vous êtes client, plusieurs options s'offrent alors à vous :
 
 - Commander des boissons et/ou des cocktails dans la carte du bar
