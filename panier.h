@@ -1,15 +1,32 @@
+/**
+ * @file Panier.h
+ * @brief Header contenant les fonctions permettant de constituer le panier du client
+ * 
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include "commande.h"
 
-int PanierBoisson(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[N], Cocktail tabC[N], panier panier[30], int j){
+/**
+ * @brief Panier des boissons et cocktails
+ * 
+ * @param[in] tabA Boissons non alcoolisées
+ * @param[in] tabB Boissons alcoolisées
+ * @param[in] tabC Cocktails
+ * @param[in] panier Panier du client
+ * @param[in] j Entier permettant de passer à l'élément suivant du panier
+ * @return Nombre de boissons/cocktails dans le panier
+ */
+int PanierBoisson(BoissonNonAlcoolisee tabA[N1], BoissonAlcoolisee tabB[N1], Cocktail tabC[N1], panier panier[30], int j){
     int b, compteur;
     float prix1 = 0;
     printf("Boissons/Cocktails :\n");
+
+    /*Affichage des boissons dans le panier et calcul le prix total*/
     if(j > 0){
         for(int i = 0; i<j; i++){  
-            if(panier[i].Boisson != 4441){                                                                                       
+            if(panier[i].Boisson != 4441){  //N'affiche pas les boissons supprimées (les boissons supprimés sont affectés à 4441)                                                                                 
                 b = panier[i].Boisson;
                 if(b > 9 && b < 20){
                     compteur = compteur+1; 
@@ -29,29 +46,47 @@ int PanierBoisson(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[N], Cockt
             }
         }
     }
-    panier[0].prix = prix1;
+    panier[0].prix = prix1; //Stockage du prix total dans une case du panier
     printf("\nPrix des boissons / cocktails : %f Euros\n", panier[0].prix);
     return compteur;
 }
 
+/**
+ * @brief Panier des cocktails personnalisés
+ * 
+ * @param[in] panier Panier du client 
+ * @param[in] numerococktail Numero du cocktail
+ */
 
 void PanierCocktail(panier panier[30], int numerococktail){
     float prix = 0;
+
+    /*Affichage des cocktails personnalisés dans le panier*/
     printf("\nCocktails personnalises :\n");
     for (int i = 0; i<numerococktail; i++){
-        if(panier[i].Cocktail.numcocktail != 4430){
+        if(panier[i].Cocktail.numcocktail != 4430){ //N'affiche pas les cocktails supprimés (les cocktails supprimés sont affectés à 4430)
             printf("Cocktail personnalise %d\n",i+1);
             prix = prix + panier[i].Cocktail.prix;
         }
     }
-    panier[1].prix = prix;
+    panier[1].prix = prix; //Stock le prix total des cocktails dans une case du panier
     printf("\nPrix des cocktails personnalises : %f Euros\n", prix);
 }
 
+/**
+ * @brief Gestion de la commande du client
+ * 
+ * @param[in] tabA Boissons non alcoolisées
+ * @param[in] tabB Boissons alcoolisées
+ * @param[in] tabC Cocktails
+ * @param[in] panier Panier du client
+ * @param[in] j Entier permettant de passer à l'élément suivant du panier
+ * @return Choix du client par rapport à sa commande
+ */
 
-int validation(BoissonNonAlcoolisee tabA[N],BoissonAlcoolisee tabB[N], Cocktail tabC[N], panier panier[30], int j, int numerococktail){
-    int a, b, c, compteur;
-    printf("\nVoici votre panier :\n");
+int validation(BoissonNonAlcoolisee tabA[N1],BoissonAlcoolisee tabB[N1], Cocktail tabC[N1], panier panier[30], int j, int numerococktail){
+    int a , b, c, compteur;
+    printf("\nVOTRE PANIER :\n\n");
     compteur = PanierBoisson(tabA, tabB, tabC, panier, j);
     PanierCocktail(panier, numerococktail);
 
@@ -60,32 +95,34 @@ int validation(BoissonNonAlcoolisee tabA[N],BoissonAlcoolisee tabB[N], Cocktail 
     scanf("%d", &a);
     switch (a){
         case 1 :
-            panier[2].prix = panier[0].prix + panier[1].prix;
+            panier[2].prix = panier[0].prix + panier[1].prix; //Calcul du prix total du panier (cocktail + boissons)
             printf("Total de votre panier : %f euros\n", panier[2].prix);
+            Sleep(2000);
+            system("cls");
             return 3;
         break;
         case 2 :
-            printf("\nBoisson[Tappez 1] ou cocktail[Tappez 2] ?\n");
+            printf("\nBoisson/cocktails[Tappez 1] ou cocktail personnalise[Tappez un autre nombre] ?\n");
             scanf("%d", &b);
             switch (b){
-                case 1 :
-                    if (compteur == 0){
+                case 1 : //Supprime la boisson souhaitée
+                    if (compteur == 0){ //Si aucune boisson n'est dans le panier, alors impossible de supprimer 
                         printf("Ton panier est vide, tu ne peux pas supprimer de boissons\n");
                         validation(tabA, tabB, tabC, panier, j-1, numerococktail);
                     }
                     printf("\nQuelle boisson voulez vous supprimer ?\n");
                     scanf("%d", &a);
-                    panier[a-1].Boisson = 4441;
-                    validation(tabA, tabB, tabC, panier, j, numerococktail);
-                break;
-                case 2 :
-                    printf("\nQuel cocktail voulez vous supprimer ?\n");
-                    scanf("%d", &c);
-                    c = c-1;
-                    panier[c].Cocktail.numcocktail = 4430;
+                    system("cls");
+                    panier[a-1].Boisson = 4441; //Supprime la boisson souhaitée en lui affectant la valeur 4441 
                     validation(tabA, tabB, tabC, panier, j, numerococktail);
                 break;
                 default :
+                    printf("\nQuel cocktail voulez vous supprimer ?\n");
+                    scanf("%d", &c);
+                    system("cls");
+                    c = c-1;
+                    panier[c].Cocktail.numcocktail = 4430; //Supprime le cocktail souhaitée en lui affectant la valeur 4430
+                    validation(tabA, tabB, tabC, panier, j, numerococktail);
                 break;
             }
         break;
@@ -101,494 +138,4 @@ int validation(BoissonNonAlcoolisee tabA[N],BoissonAlcoolisee tabB[N], Cocktail 
             return 5;
         break;
     }
-    return 0;
 }
-
-/*
-void animation(){
-
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("                                 xxxxxxxxxxx\n");
-    printf("                        xxxxxxxxxxxxxxxxxxxx\n");
-    printf("                xxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
-    printf("                xxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
-    printf("                        xxxxxxxxxxxxxxxxxxxx\n");
-    printf(" xxxxxxxxxxxxxxxxxxxxx            xxxxxxxxxx\n");
-    printf("  xx               xx\n");
-    printf("   xx             xx\n");
-    printf("    xx           xx\n");
-    printf("     xx         xx\n");
-    printf("      xxxxxxxxxxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("         xxxxx\n");
-    Sleep(1000);
-    system("cls");
-
-
-
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("                                 xxxxxxxxxxx\n");
-    printf("                        xxxxxxxxxx        xx\n");
-    printf("                xxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
-    printf("             xx xxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
-    printf("            xx          xxxxxxxxxxxxxxxxxxxx\n");
-    printf(" xxxxxxxxxxxxxxxxxxxxx            xxxxxxxxxx\n");
-    printf("  xx       xxx     xx\n");
-    printf("   xx      xx     xx\n");
-    printf("    xx           xx\n");
-    printf("     xx         xx\n");
-    printf("      xxxxxxxxxxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("         xxxxx\n");
-    Sleep(1000);
-    system("cls");
-
-
-
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("                                 xxxxxxxxxxx\n");
-    printf("                        xxxxxxxxxx         x\n");
-    printf("                xxxxxxxxx              xxxxx\n");
-    printf("             xx xxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
-    printf("            xx          xxxxxxxxxxxxxxxxxxxx\n");
-    printf(" xxxxxxxxxxxxxxxxxxxxx            xxxxxxxxxx\n");
-    printf("  xx       xxx     xx\n");
-    printf("   xx      xx     xx\n");
-    printf("    xx    xxx    xx\n");
-    printf("     xx  xxxx   xx\n");
-    printf("      xxxxxxxxxxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("         xxxxx\n");
-    Sleep(1000);
-    system("cls");
-
-
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("                                 xxxxxxxxxxx\n");
-    printf("                        xxxxxxxxxx         x\n");
-    printf("                xxxxxxxxx                  x\n");
-    printf("             xx xxxxxxxxxxxxxxxxxxxx       x\n");
-    printf("            x           xxxxxxxxxxxxxxx    x\n");
-    printf(" xxxxxxxxxxxxxxxxxxxxx            xxxxxxxxxx\n");
-    printf("  xx        x      xx\n");
-    printf("   xx      xx     xx\n");
-    printf("    xxxxxxxxxxxxxxx\n");
-    printf("     xxxxxxxxxxxxx\n");
-    printf("      xxxxxxxxxxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("         xxxxx\n");
-    Sleep(1000);
-    system("cls");
-
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("                                 xxxxxxxxxxx\n");
-    printf("                        xxxxxxxxxx         x\n");
-    printf("                xxxxxxxxx                  x\n");
-    printf("                xxxxxxxxx                  x\n");
-    printf("                        xxxxxxxxxxxxxxx    x\n");
-    printf(" xxxxxxxxxxxxxxxxxxxxx            xxxxxxxxxx\n");
-    printf("  xx        x      xx\n");
-    printf("   xx      xx     xx\n");
-    printf("    xxxxxxxxxxxxxxx\n");
-    printf("     xxxxxxxxxxxxx\n");
-    printf("      xxxxxxxxxxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("         xxxxx\n");
-    Sleep(1000);
-    system("cls");
-
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("                                 xxxxxxxxxxx\n");
-    printf("                        xxxxxxxxxx         x\n");
-    printf("                xxxxxxxxx                  x\n");
-    printf("                xxxxxxxxx                  x\n");
-    printf("                        xxxxxxxxxxxxxxx    x\n");
-    printf(" xxxxxxxxxxxxxxxxxxxxx            xxxxxxxxxx\n");
-    printf("  xx               xx\n");
-    printf("   xxxxxxxxxxxxxxxxx\n");
-    printf("    xxxxxxxxxxxxxxx\n");
-    printf("     xxxxxxxxxxxxx\n");
-    printf("      xxxxxxxxxxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("         xxxxx\n");
-    Sleep(1000);
-    system("cls");
-
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("      \n");
-    printf("       \n");
-    printf("       \n");
-    printf("       \n");
-    printf("        \n");
-    printf(" xxxxxxxxxxxxxxxxxxxxx            \n");
-    printf("  xx               xx\n");
-    printf("   xxxxxxxxxxxxxxxxx\n");
-    printf("    xxxxxxxxxxxxxxx\n");
-    printf("     xxxxxxxxxxxxx\n");
-    printf("      xxxxxxxxxxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("         xxxxx\n");
-    Sleep(1000);
-    system("cls");
-
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("      \n");
-    printf("       \n");
-    printf("       \n");
-    printf("       \n");
-    printf("                             xx\n");
-    printf(" xxxxxxxxxxxxxxxxxxxxx      xx            \n");
-    printf("  xx               xx      xx\n");
-    printf("   xxxxxxxxxxxxxxxxx      xx\n");
-    printf("    xxxxxxxxxxxxxxx      xx\n");
-    printf("     xxxxxxxxxxxxx      xx\n");
-    printf("      xxxxxxxxxxx      xx\n");
-    printf("          xxx         xx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("         xxxxx\n");
-    Sleep(1000);
-    system("cls");
-
-    printf("                          xx\n");
-    printf("                         xx\n");
-    printf("                        xx\n");
-    printf("                       xx\n");
-    printf("                      xx\n");
-    printf("                     xx\n");
-    printf("                    xx\n");
-    printf("                   xx\n");
-    printf("        \n");
-    printf(" xxxxxxxxxxxxxxxxxxxxx            \n");
-    printf("  xx               xx\n");
-    printf("   xxxxxxxxxxxxxxxxx\n");
-    printf("    xxxxxxxxxxxxxxx\n");
-    printf("     xxxxxxxxxxxxx\n");
-    printf("      xxxxxxxxxxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("         xxxxx\n");
-    Sleep(1000);
-    system("cls");
-
-     printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("                  xx\n");
-    printf("                 xx\n");
-    printf("                xx\n");
-    printf("               xx\n");
-    printf("              xx\n");
-    printf("             xx\n");
-    printf(" xxxxxxxxxxxxxxxxxxxxx            \n");
-    printf("  xx        xx     xx\n");
-    printf("   xxxxxxxxxxxxxxxxx\n");
-    printf("    xxxxxxxxxxxxxxx\n");
-    printf("     xxxxxxxxxxxxx\n");
-    printf("      xxxxxxxxxxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("         xxxxx\n");
-    Sleep(1000);
-    system("cls");
-
-     printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("                 \n");
-    printf("                 xx\n");
-    printf("                xx\n");
-    printf("               xx                  xxxx\n");
-    printf("              xx                  xxxxx\n");
-    printf("             xx                  xxxxx\n");
-    printf(" xxxxxxxxxxxxxxxxxxxxx        xxxxxxx\n");
-    printf("  xx       xx      xx        x       x\n");
-    printf("   xxxxxxxxxxxxxxxxx        x         x\n");
-    printf("    xxxxxxxxxxxxxxx         x         x\n");
-    printf("     xxxxxxxxxxxxx          x         x\n");
-    printf("      xxxxxxxxxxx            x       x\n");
-    printf("          xxx                 xxxxxxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("         xxxxx\n");
-    Sleep(1000);
-    system("cls");
-
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("                 \n");
-    printf("                 xx\n");
-    printf("                xx\n");
-    printf("               xx                  xxxx\n");
-    printf("              xx                  xxxxx\n");
-    printf("             xx                  xxxxx\n");
-    printf(" xxxxxxxxxxxxxxxxxxxxx        xxxxxxx\n");
-    printf("  xx       xx      xx        x       x              xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
-    printf("   xxxxxxxxxxxxxxxxx        x         x             xxxxxxxxxxxxxxxxx            x\n");
-    printf("    xxxxxxxxxxxxxxx         x         x              xxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
-    printf("     xxxxxxxxxxxxx          x         x               xxxxxxxxxxxxxxx\n");
-    printf("      xxxxxxxxxxx            x       x                   xxxxxxxxx\n");
-    printf("          xxx                 xxxxxxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("         xxxxx\n");
-    printf("\n");
-    printf("\n");
-    printf("Decoupage du Citron");
-    Sleep(1000);
-    system("cls");
-
-        printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("                 \n");
-    printf("                 xx\n");
-    printf("                xx\n");
-    printf("               xx                  xxxx\n");
-    printf("              xx                  xxxxx\n");
-    printf("             xx        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
-    printf(" xxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxx            x\n");
-    printf("  xx       xx      xx   xxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
-    printf("   xxxxxxxxxxxxxxxxx     xxxxxxxxxxxxxxx\n");
-    printf("    xxxxxxxxxxxxxxx         xxxxxxxxx x\n");
-    printf("     xxxxxxxxxxxxx          x         x\n");
-    printf("      xxxxxxxxxxx            x       x\n");
-    printf("          xxx                 xxxxxxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("         xxxxx\n");
-    printf("\n");
-    printf("\n");
-    printf("Decoupage du Citron");
-    Sleep(1000);
-    system("cls");
-
-     printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("                 \n");
-    printf("                 xx\n");
-    printf("                xx\n");
-    printf("               xx                  xxxx\n");
-    printf("              xx                  xxxxx\n");
-    printf("             xx                  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
-    printf(" xxxxxxxxxxxxxxxxxxxxx        xxxxxxxxxxxxxxxxxxxxxx            x\n");
-    printf("  xx       xx      xx        x      xxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
-    printf("   xxxxxxxxxxxxxxxxx        x        xxxxxxxxxxxxxxx\n");
-    printf("    xxxxxxxxxxxxxxx         x         x xxxxxxxxx\n");
-    printf("     xxxxxxxxxxxxx          x         x\n");
-    printf("      xxxxxxxxxxx            x       x\n");
-    printf("          xxx                 xxxxxxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("         xxxxx\n");
-    printf("\n");
-    printf("\n");
-    printf("Decoupage du Citron");
-    Sleep(1000);
-    system("cls");
-
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("                 \n");
-    printf("                 xx\n");
-    printf("                xx\n");
-    printf("               xx                  xxxx\n");
-    printf("              xx                  xxxxx\n");
-    printf("             xx        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
-    printf(" xxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxx            x\n");
-    printf("  xx       xx      xx   xxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
-    printf("   xxxxxxxxxxxxxxxxx     xxxxxxxxxxxxxxx\n");
-    printf("    xxxxxxxxxxxxxxx         xxxxxxxxx x\n");
-    printf("     xxxxxxxxxxxxx          x         x\n");
-    printf("      xxxxxxxxxxx            x       x\n");
-    printf("          xxx                 xxxxxxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("         xxxxx\n");
-    printf("\n");
-    printf("\n");
-    printf("Decoupage du Citron");
-    Sleep(1000);
-    system("cls");
-
-     printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("                 \n");
-    printf("                 xx\n");
-    printf("                xx\n");
-    printf("               xx                  xxxx\n");
-    printf("              xx                  xxxxx\n");
-    printf("             xx                  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx         \n");
-    printf(" xxxxxxxxxxxxxxxxxxxxx        xxxxxxxxxxxxxxxxxxxxxx            x        \n");
-    printf("  xx       xx      xx        x      xxxxxxxxxxxxxxxxxxxxxxxxxxxxx          \n");
-    printf("   xxxxxxxxxxxxxxxxx        x        xxxxxxxxxxxxxxx\n");
-    printf("    xxxxxxxxxxxxxxx         x         x xxxxxxxxx\n");
-    printf("     xxxxxxxxxxxxx          x         x\n");
-    printf("      xxxxxxxxxxx            x       x\n");
-    printf("          xxx                 xxxxxxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("         xxxxx\n");
-    printf("\n");
-    printf("\n");
-    printf("Decoupage du Citron");
-    Sleep(1000);
-    system("cls");
-
-        printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("                 \n");
-    printf("                 xx\n");
-    printf("                xx\n");
-    printf("               xx                  xxxx\n");
-    printf("              xx                  xxxxx\n");
-    printf("             xx        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
-    printf(" xxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxx            x\n");
-    printf("  xx       xx      xx   xxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
-    printf("   xxxxxxxxxxxxxxxxx     xxxxxxxxxxxxxxx\n");
-    printf("    xxxxxxxxxxxxxxx         xxxxxxxxx x\n");
-    printf("     xxxxxxxxxxxxx          x         x\n");
-    printf("      xxxxxxxxxxx            x       x\n");
-    printf("          xxx                 xxxxxxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("         xxxxx\n");
-    printf("\n");
-    printf("\n");
-    printf("Decoupage du Citron");
-    Sleep(1000);
-    system("cls");
-
-     printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("                 \n");
-    printf("                 xx\n");
-    printf("                xx\n");
-    printf("               xx                  xxxx\n");
-    printf("              xx                  xxxxx\n");
-    printf("             xx                  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx           \n");
-    printf(" xxxxxxxxxxxxxxxxxxxxx        xxxxxxxxxxxxxxxxxxxxxx            x          \n");
-    printf("  xx       xx      xx        x      xxxxxxxxxxxxxxxxxxxxxxxxxxxxx           \n");
-    printf("   xxxxxxxxxxxxxxxxx        x        xxxxxxxxxxxxxxx\n");
-    printf("    xxxxxxxxxxxxxxx         x         x xxxxxxxxx\n");
-    printf("     xxxxxxxxxxxxx          x         x\n");
-    printf("      xxxxxxxxxxx            x       x\n");
-    printf("          xxx                 xxxxxxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("         xxxxx\n");
-    printf("\n");
-    printf("\n");
-    printf("Decoupage du Citron");
-    Sleep(1000);
-    system("cls");
-
-     printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("                 \n");
-    printf("                 xx\n");
-    printf("                xx\n");
-    printf("               xx\n");
-    printf("              xx\n");
-    printf("             xx\n");
-    printf(" xxxxxxxxxxxxxxxxxxxxx        xxxxxxxxxx          \n");
-    printf("  xx       xx      xx        xxxxxx    xx\n");
-    printf("   xxxxxxxxxxxxxxxxx         xxxxx      xx\n");
-    printf("    xxxxxxxxxxxxxxx          xxxx   xx  xx\n");
-    printf("     xxxxxxxxxxxxx           xxxx       xx\n");
-    printf("      xxxxxxxxxxx             xxxxxx   xxx\n");
-    printf("          xxx                  xxxxxxxxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("         xxxxx\n");
-    Sleep(1000);
-    system("cls");
-
-     printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("                 \n");
-    printf("                 xx\n");
-    printf("                xx\n");
-    printf("               xx\n");
-    printf("              xx   xxxxxxx\n");
-    printf("             xx   xxxxxxxxx\n");
-    printf(" xxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
-    printf("  xx       xx       xxxxxxxx\n");
-    printf("   xxxxxxxxxxxxxxxxxxxxxxxxx\n");
-    printf("    xxxxxxxxxxxxxxxxxxxxxx\n");
-    printf("     xxxxxxxxxxxxx\n");
-    printf("      xxxxxxxxxxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("          xxx\n");
-    printf("         xxxxx\n");
-}
-*/

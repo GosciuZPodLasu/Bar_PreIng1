@@ -1,7 +1,13 @@
+/**
+ * @file InitialisationBoisson.h
+ * @brief Header contenant toutes les fonctions nécessaires à l'initialisation des boissons et cocktails du bar ainsi que leurs informations 
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#define N 10
+#define N1 10
+
 
 typedef struct{
     char* nom; //Nom de la boisson
@@ -22,26 +28,35 @@ typedef struct{
 }BoissonAlcoolisee;
 
 typedef struct{
-    char* nom;
-    int Boisson1;
-    int Boisson2;
-    int Boisson3;
-    int numcocktail;
-    float degreSucre;
-    float degreAlcool;
-    float prix;
+    char* nom; //Nom du cocktail
+    int Boisson1; //Numero de la boisson 1 composant le cocktail
+    int Boisson2; //Numero de la boisson 2 composant le cocktail 
+    int Boisson3; //Numero de la boisson 3 composant le cocktail
+    int numcocktail; //Numero du cocktail
+    float degreSucre; //Degré sucre du cocktail
+    float degreAlcool; //Degré alcool du cocktail
+    float prix; //Prix du cocktail
 }Cocktail;
 
 typedef struct{
-    int Boisson;
-    float prix;
+    int Boisson; //Numero des boissons contenues dans le panier 
+    float prix; //Prix du panier 
     Cocktail Cocktail;
 }panier;
 
+/**
+ * @brief Initialisation du stock des boissons non alcoolisées
+ * 
+ * @param[in] tabA Les boissons non alcoolisées
+ * @param[in] nom Le fichier txt où l'on va stocker le stock des boissons non alcoolisées
+ */
 
-void inistock1(BoissonNonAlcoolisee tabA[N], char* nom){
+void inistock1(BoissonNonAlcoolisee tabA[N1], char* nom){
     char stock[10][255];
     int so, sp, sa, sf, sl, sg, spc, spe, sm, scoca;
+
+    /*Récupération du stock des boissons non alcoolisées dans le fichier txt*/
+
     FILE *f = fopen(nom, "r");
     for (int j = 0; j<10; j++){
         fgets(stock[j], 255, (FILE*)f);
@@ -59,10 +74,20 @@ void inistock1(BoissonNonAlcoolisee tabA[N], char* nom){
     fclose(f);
 }
 
-void inistock2(BoissonAlcoolisee tabB[N], char* nom2){
+/**
+ * @brief Initialisation du stock des boissons alcoolisées
+ * 
+ * @param[in] tabB Les boissons alcoolisées
+ * @param[in] nom2 Le fichier txt où l'on va stocker le stock des boissons alcoolisées
+ */
+
+void inistock2(BoissonAlcoolisee tabB[N1], char* nom2){
     char stock[10][255];
     int sg, sv, sr, st, sm, sw, sc, sb, sro, str;
     FILE *f = fopen(nom2, "r");
+
+    /*Récupération du stock des boissons alcoolisées dans le fichier txt*/
+
     for (int j = 0; j<10; j++){
         fgets(stock[j], 255, (FILE*)f);
     }
@@ -79,31 +104,53 @@ void inistock2(BoissonAlcoolisee tabB[N], char* nom2){
     str = atoi(stock[9]); tabB[9].stock = str;   
 }
 
-void majstock1(BoissonNonAlcoolisee tabA[N], char* nom){
+/**
+ * @brief Mise à jour automatique des stocks des boissons non alcoolisées
+ * 
+ * @param[in] tabA Les boissons non alcoolisées
+ * @param[in] nom Le fichier txt où l'on va stocker le stock des boissons non alcoolisées
+ */
+
+void majstock1(BoissonNonAlcoolisee tabA[N1], char* nom){
+    /*Met à jour les stocks des boissons non alcoolisées dans le fichier txt */
+
     FILE *f = fopen(nom, "w");
-    for(int i = 0; i<N; i++){
+    for(int i = 0; i<N1; i++){
         fprintf(f,"%d\n", tabA[i].stock);
     }
     fclose(f);
-    for(int j = 0; j<N ;j++){
+    for(int j = 0; j<N1 ;j++){
         tabA[j].stockcocktail = tabA[j].stock * tabA[j].contenance;
     }
 }
 
-void majstock2(BoissonAlcoolisee tabB[N], char* nom2){
+/**
+ * @brief Mise à jour automatique des stocks des boissons alcoolisées
+ * 
+ * @param[in] tabB Les boissons alcoolisées
+ * @param[in] nom2 Le fichier txt où l'on va stocker le stock des boissons alcoolisées
+ */
+
+void majstock2(BoissonAlcoolisee tabB[N1], char* nom2){
+    /*Met à jour les stocks des boissons alcoolisées dans le fichier txt */
+
     FILE *f = fopen(nom2, "w");
-    for(int i = 0; i<N; i++){
+    for(int i = 0; i<N1; i++){
         fprintf(f,"%d\n", tabB[i].stock);
     }
     fclose(f);
-    for (int j = 0; j<N; j++){
+    for (int j = 0; j<N1; j++){
         tabB[j].stockcocktail = tabB[j].stock * tabB[j].contenance;
     }
 }
 
+/**
+ * @brief Initialisation des boissons non alcoolisées avec leurs détails
+ * 
+ * @param[in] tabA Les boissons non alcoolisées
+ */
 
-
-void initialisationBoissonNonAlcoolisee(BoissonNonAlcoolisee tabA[N]){
+void initialisationBoissonNonAlcoolisee(BoissonNonAlcoolisee tabA[N1]){
     BoissonNonAlcoolisee jusorange, juspomme, jusananas, tonic, limonade, siropgrenadine, pulcocitron, siroppeche, siropmenthe, coca;
 
     //BOISSONS NON ALCOOLISEES
@@ -192,7 +239,14 @@ void initialisationBoissonNonAlcoolisee(BoissonNonAlcoolisee tabA[N]){
     
 }
 
-void initialisationBoissonAlcoolisee(BoissonAlcoolisee tabB[N]){
+/**
+ * @brief Initialisation des boissons alcoolisées avec leurs détails
+ * 
+ * @param[in] tabB Les boissons alcoolisées
+ */
+
+
+void initialisationBoissonAlcoolisee(BoissonAlcoolisee tabB[N1]){
     BoissonAlcoolisee gin, vodka, rhum, tequila, malibu, whisky, champagne, bourbon, rose, triplesec;
 
     //BOISSONS ALCOOLISEES
@@ -281,18 +335,28 @@ void initialisationBoissonAlcoolisee(BoissonAlcoolisee tabB[N]){
         
 }
 
+/**
+ * @brief Initialisation des cocktails
+ * 
+ * @param[in] tabA Les boissons non alcoolisées
+ * @param[in] tabB Les boissons alcoolisées
+ * @param[in] tabC Les cocktails
+ * @param[in] recup entier permettant de mettre à jour le stock cocktail
+ * @param[in] b Choix du cocktail par le client
+ */
 
-void initialisationCocktail(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[N], Cocktail tabC[N], int recup, int b){
+void initialisationCocktail(BoissonNonAlcoolisee tabA[N1], BoissonAlcoolisee tabB[N1], Cocktail tabC[N1], int recup, int b){
     Cocktail mojito, pinacolada, margarita, cosmopolitan, gintonic;
+    /*Initalistion des cocktails avec leur boissons respectives avec calcul du stock, du degreAlcool et degreSucre de chaque cocktail*/
 
     //MOJITO
     mojito.nom = "Mojito";
     mojito.prix = (tabA[8].prix + tabA[7].prix + tabB[2].prix) * 1.10;
-    if (recup != 1){
+    if (recup != 1){ //Initialisation du stockcocktail de chaque boisson composant le cocktail avec les informations du fichier txt
         mojito.Boisson1 = tabB[2].stockcocktail;
         mojito.Boisson2 = tabA[8].stockcocktail;
         mojito.Boisson3 = tabA[7].stockcocktail;
-    }else{
+    }else{ //Si recup = 1, le stock cocktail se mettra à jour avec le nouveau stockcocktail de chaque boisson composant le cocktail qui a été calculé dans la prise de commande d'un cocktail
         if (b == 20){
         tabB[2].stockcocktail = tabC[0].Boisson1;
         tabA[8].stockcocktail = tabC[0].Boisson2;
@@ -379,11 +443,13 @@ void initialisationCocktail(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB
 }
 
 
-void calculstock(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[N]){
-    for(int i = 0; i<N; i++){
+void calculstock(BoissonNonAlcoolisee tabA[N1], BoissonAlcoolisee tabB[N1]){
+    /*Calcul du stock des boissons à partir des nouveaux stock cocktails*/
+
+    for(int i = 0; i<N1; i++){
         tabA[i].stock = (tabA[i].stockcocktail / tabA[i].contenance);
     }
-    for (int j = 0; j<N; j++){
+    for (int j = 0; j<N1; j++){
         tabB[j].stock = (tabB[j].stockcocktail / tabB[j].contenance);
     }
 }
