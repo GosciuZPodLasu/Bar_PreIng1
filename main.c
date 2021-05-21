@@ -1,12 +1,13 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 #include "InitialisationBoisson.h"
 #include "interface.h"
-#include <time.h>
 
 
 int main(void){
     float CA = 0;
+    int b = 0, recup = 0;
 
     BoissonNonAlcoolisee tabA[N];
     char* nom = "BoissonNonAlcoolisee.txt";
@@ -21,10 +22,11 @@ int main(void){
     inistock2(tabB, nom2);
 
     Cocktail tabC[N];
-    initialisationCocktail(tabA, tabB, tabC);
+    initialisationCocktail(tabA, tabB, tabC, recup, b);
 
     panier panier[30] = {0};
-    choixPerso(tabA, tabB, tabC, panier, CA);
+    choixPerso(tabA, tabB, tabC, panier, CA, nom, nom2);
+    
     return 0;
 }
 
@@ -38,7 +40,7 @@ int main(void){
 - Affichage du chiffre d'affaire pour le barman
 - Calcul du prix d'un cocktail en fonction des degrés et contenances en majorant le prix de 10% du total du prix des boissons comprises dans le cocktail
 
-*Limite taille cocktail*
-*stock cocktail dans la preparation cocktail*
-*mise a jour auto du stock*
+
+*visuel : couleurs , clear terminal, animations, sleeps*
+
 */

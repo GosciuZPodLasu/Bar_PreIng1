@@ -12,7 +12,7 @@ float remplirstock(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[N], floa
         scanf("%d", &a);
         tabB[s-10].stock = tabB[s-10].stock + a;
         tabB[s-10].stockcocktail = tabB[s-10].stock * tabB[s-10].contenance;
-        cout = b*tabB[s-10].prix;
+        cout = a*tabB[s-10].prix;
     }else{
         if(s > -1 && s < 11){
             printf("Vous avez choisi : %s\n", tabA[s].nom);

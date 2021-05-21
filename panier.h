@@ -89,7 +89,7 @@ int validation(BoissonNonAlcoolisee tabA[N],BoissonAlcoolisee tabB[N], Cocktail 
                 break;
             }
         break;
-        case 3 :   
+        case 3 :
             return 2;
         break;
         case 4 :

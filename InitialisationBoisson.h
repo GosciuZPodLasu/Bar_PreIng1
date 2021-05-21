@@ -59,10 +59,10 @@ void inistock1(BoissonNonAlcoolisee tabA[N], char* nom){
     fclose(f);
 }
 
-void inistock2(BoissonAlcoolisee tabB[N], char* nom){
+void inistock2(BoissonAlcoolisee tabB[N], char* nom2){
     char stock[10][255];
     int sg, sv, sr, st, sm, sw, sc, sb, sro, str;
-    FILE *f = fopen(nom, "r");
+    FILE *f = fopen(nom2, "r");
     for (int j = 0; j<10; j++){
         fgets(stock[j], 255, (FILE*)f);
     }
@@ -78,6 +78,29 @@ void inistock2(BoissonAlcoolisee tabB[N], char* nom){
     sro = atoi(stock[8]); tabB[8].stock = sro; 
     str = atoi(stock[9]); tabB[9].stock = str;   
 }
+
+void majstock1(BoissonNonAlcoolisee tabA[N], char* nom){
+    FILE *f = fopen(nom, "w");
+    for(int i = 0; i<N; i++){
+        fprintf(f,"%d\n", tabA[i].stock);
+    }
+    fclose(f);
+    for(int j = 0; j<N ;j++){
+        tabA[j].stockcocktail = tabA[j].stock * tabA[j].contenance;
+    }
+}
+
+void majstock2(BoissonAlcoolisee tabB[N], char* nom2){
+    FILE *f = fopen(nom2, "w");
+    for(int i = 0; i<N; i++){
+        fprintf(f,"%d\n", tabB[i].stock);
+    }
+    fclose(f);
+    for (int j = 0; j<N; j++){
+        tabB[j].stockcocktail = tabB[j].stock * tabB[j].contenance;
+    }
+}
+
 
 
 void initialisationBoissonNonAlcoolisee(BoissonNonAlcoolisee tabA[N]){
@@ -259,53 +282,92 @@ void initialisationBoissonAlcoolisee(BoissonAlcoolisee tabB[N]){
 }
 
 
-void initialisationCocktail(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[N], Cocktail tabC[N]){
+void initialisationCocktail(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[N], Cocktail tabC[N], int recup, int b){
     Cocktail mojito, pinacolada, margarita, cosmopolitan, gintonic;
-    
+
     //MOJITO
     mojito.nom = "Mojito";
     mojito.prix = (tabA[8].prix + tabA[7].prix + tabB[2].prix) * 1.10;
-    mojito.Boisson1 = tabB[2].stockcocktail;
-    mojito.Boisson2 = tabA[8].stockcocktail;
-    mojito.Boisson3 = tabA[7].stockcocktail;
+    if (recup != 1){
+        mojito.Boisson1 = tabB[2].stockcocktail;
+        mojito.Boisson2 = tabA[8].stockcocktail;
+        mojito.Boisson3 = tabA[7].stockcocktail;
+    }else{
+        if (b == 20){
+        tabB[2].stockcocktail = tabC[0].Boisson1;
+        tabA[8].stockcocktail = tabC[0].Boisson2;
+        tabA[7].stockcocktail = tabC[0].Boisson3;
+        }
+    }
     mojito.degreAlcool = tabB[2].degreAlcool;
     mojito.degreSucre = (tabA[2].degreSucre + tabA[8].degreSucre)/2;
+
 
     //PINACOLADA
     pinacolada.nom = "Pina Colada";
     pinacolada.prix = (tabA[2].prix + tabB[2].prix) * 1.10;
-    pinacolada.Boisson1 = tabA[2].stockcocktail;
-    pinacolada.Boisson2 = tabB[2].stockcocktail;
+    if (recup != 1){
+        pinacolada.Boisson1 = tabA[2].stockcocktail;
+        pinacolada.Boisson2 = tabB[2].stockcocktail;
+    }else{
+        if(b == 21){
+        tabA[2].stockcocktail = tabC[1].Boisson1;
+        tabB[2].stockcocktail = tabC[1].Boisson2;
+        }
+    }
     pinacolada.degreAlcool = tabB[2].degreAlcool;
     pinacolada.degreSucre = tabA[2].degreSucre;
 
     //MARGARITA
     margarita.nom = "Margarita";
     margarita.prix = (tabA[8].prix + tabB[3].prix + tabB[9].prix) * 1.10;
-    margarita.Boisson1 = tabA[8].stockcocktail;
-    margarita.Boisson2 = tabB[3].stockcocktail;
-    margarita.Boisson3 = tabB[9].stockcocktail;
+    if (recup != 1){
+        margarita.Boisson1 = tabA[8].stockcocktail;
+        margarita.Boisson2 = tabB[3].stockcocktail;
+        margarita.Boisson3 = tabB[9].stockcocktail;
+    }else{
+        if(b == 22){
+        tabA[8].stockcocktail = tabC[2].Boisson1;
+        tabB[3].stockcocktail = tabC[2].Boisson2;
+        tabB[9].stockcocktail = tabC[2].Boisson3;
+        }
+    }
     margarita.degreAlcool = (tabB[3].degreAlcool + tabB[9].degreAlcool)/2;
     margarita.degreSucre = tabA[8].degreSucre;
 
     //COSMOPOLITAN
     cosmopolitan.nom = "Cosmopolitan";
     cosmopolitan.prix = (tabA[8].prix + tabB[1].prix + tabB[9].prix) * 1.10;
-    cosmopolitan.Boisson1 = tabB[1].stockcocktail;
-    cosmopolitan.Boisson2 = tabA[8].stockcocktail;
-    cosmopolitan.Boisson3 = tabB[9].stockcocktail;
+    if (recup != 1){
+        cosmopolitan.Boisson1 = tabB[1].stockcocktail;
+        cosmopolitan.Boisson2 = tabA[8].stockcocktail;
+        cosmopolitan.Boisson3 = tabB[9].stockcocktail;
+    }else{
+        if(b == 23){
+        tabB[1].stockcocktail = tabC[3].Boisson1;
+        tabA[8].stockcocktail = tabC[3].Boisson2;
+        tabB[9].stockcocktail = tabC[3].Boisson3;
+        }
+    }
     cosmopolitan.degreAlcool = (tabB[1].degreAlcool + tabB[9].degreAlcool)/2;
     cosmopolitan.degreSucre = tabA[8].degreSucre;
 
     //GIN TONIC
     gintonic.nom = "Gin Tonic";
     gintonic.prix = (tabA[8].prix + tabA[3].prix + tabB[0].prix) * 1.10;
-    gintonic.Boisson1 = tabB[0].stockcocktail;
-    gintonic.Boisson2 = tabA[3].stockcocktail;
-    gintonic.Boisson3 = tabA[8].stockcocktail;
+    if (recup != 1){
+        gintonic.Boisson1 = tabB[0].stockcocktail;
+        gintonic.Boisson2 = tabA[3].stockcocktail;
+        gintonic.Boisson3 = tabA[8].stockcocktail;
+    }else{
+        if(b == 24){
+        tabB[0].stockcocktail = tabC[4].Boisson1;
+        tabA[3].stockcocktail = tabC[4].Boisson2;
+        tabA[8].stockcocktail = tabC[4].Boisson3;
+        }
+    }
     gintonic.degreAlcool = tabB[0].degreAlcool;
     gintonic.degreSucre = (tabA[3].degreSucre + tabA[8].degreSucre)/2;
-
     
     /*Affectation des cases du tableau pour chaque cocktail*/
 
@@ -316,3 +378,12 @@ void initialisationCocktail(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB
     tabC[4] = gintonic;
 }
 
+
+void calculstock(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[N]){
+    for(int i = 0; i<N; i++){
+        tabA[i].stock = (tabA[i].stockcocktail / tabA[i].contenance);
+    }
+    for (int j = 0; j<N; j++){
+        tabB[j].stock = (tabB[j].stockcocktail / tabB[j].contenance);
+    }
+}

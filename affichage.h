@@ -10,7 +10,7 @@ void affichageClient(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[N], Co
         if(tabA[i].stock > 0){
         puts("\n");
         printf("%s [%d]""   %f Euros\n",tabA[i].nom, i, tabA[i].prix);
-        printf("%f cl, %f Degre sucre : g/100 ml\n", tabA[i].contenance, tabA[i].degreSucre);  
+        printf("%f cl, Degre sucre : %f g/100 ml\n", tabA[i].contenance, tabA[i].degreSucre);  
         } 
     }
     printf("\n- - - - - - - - - - - - - - - - - \n");
@@ -29,7 +29,7 @@ void affichageClient(BoissonNonAlcoolisee tabA[N], BoissonAlcoolisee tabB[N], Co
     printf(" /     /  /  /    /__/  /    /_|  /  /   (   \n");        
     printf("(__   (__/  (__  /  )  (    (  | (  (__ __)  \n");
     for (int k = 0; k<N; k++){
-        if(tabC[k].Boisson1 > 0 && tabC[k].Boisson2 > 0 && tabC[k].Boisson3 > 0){
+        if((tabC[k].Boisson1 > 0 && tabC[k].Boisson2 > 0) || (tabC[k].Boisson1 > 0 && tabC[k].Boisson2 > 0 && tabC[k].Boisson3 > 0)){
             puts("\n");
             printf("%s [%d]""   %f Euros\n",tabC[k].nom, k+20, tabC[k].prix);
             printf("Degre alcool : %f %%, Degre sucre : %f g/100 ml\n", tabC[k].degreAlcool, tabC[k].degreSucre);
