@@ -78,7 +78,7 @@ void Client(BoissonNonAlcoolisee tabA[N1], BoissonAlcoolisee tabB[N1],Cocktail t
     system("cls");
 
     switch(choix){
-        case 1 : //Commande une boisson
+        case 1 : //Commande une boisson ou cocktail
             alea = 0;
             affichageClient(tabA, tabB, tabC);
             b = commande(tabA, tabB, tabC, panier, j, alea);
@@ -240,8 +240,8 @@ void Barman(BoissonNonAlcoolisee tabA[N1], BoissonAlcoolisee tabB[N1], Cocktail 
         case 5 : //Quitte le jeu 
             exit(EXIT_SUCCESS);
         break;
-        default : //Demande à l'utilisateur de resaisir son choix en cas de choix hors intervalle (1-6)
-            printf("Veuillez choisir entre 1 et 6\n\n");
+        default : //Demande à l'utilisateur de resaisir son choix en cas de choix hors intervalle (1-5)
+            printf("Veuillez choisir entre 1 et 5\n\n");
             Barman(tabA, tabB, tabC, panier, CA, nom, nom2);
         break;
     }

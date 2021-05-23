@@ -121,33 +121,33 @@ int commande(BoissonNonAlcoolisee tabA[N1], BoissonAlcoolisee tabB[N1], Cocktail
                     if (b == 21){
                         tabC[b-20].Boisson1 = tabC[b-20].Boisson1 - 15;
                         tabC[b-20].Boisson2 = tabC[b-20].Boisson2 - 15;
-                        if (tabC[b-20].Boisson1 < 0){
+                        if (tabC[b-20].Boisson1 < 0 || tabC[b-20].Boisson2){
                             printf("\nPas assez de stock pour le %s\n", tabC[b-20].nom);
-                            tabC[b-20].Boisson1 = 0;
-                        } 
-                        if (tabC[b-20].Boisson2 < 0){
-                            printf("\nPas assez de stock pour le %s\n", tabC[b-20].nom);
-                            tabC[b-20].Boisson2 = 0;
-                        }      
+                            if(tabC[b-20].Boisson1 < 0){
+                                tabC[b-20].Boisson1 = 0;
+                            }
+                            if(tabC[b-20].Boisson2 < 0){
+                                tabC[b-20].Boisson2 = 0;
+                            } 
+                            panier[j].Boisson = 4441;
+                        }  
                     }else{
                         tabC[b-20].Boisson1 = tabC[b-20].Boisson1 - 10;
                         tabC[b-20].Boisson2 = tabC[b-20].Boisson2 - 10;
                         tabC[b-20].Boisson3 = tabC[b-20].Boisson3 - 10;
-                        if (tabC[b-20].Boisson1 < 0){
+                        if (tabC[b-20].Boisson1 < 0 || tabC[b-20].Boisson2 || tabC[b-20].Boisson3 < 0){
                             printf("\nPas assez de stock pour le %s\n", tabC[b-20].nom);
-                            tabC[b-20].Boisson1 = 0;
-                            panier[j].Boisson = 4441;
-                        }  
-                        if (tabC[b-20].Boisson2 < 0){
-                            printf("\nPas assez de stock pour le %s\n", tabC[b-20].nom);
-                            tabC[b-20].Boisson2 = 0;
-                            panier[j].Boisson = 4441;
+                            if(tabC[b-20].Boisson1 < 0){
+                                tabC[b-20].Boisson1 = 0;
+                            }
+                            if(tabC[b-20].Boisson2 < 0){
+                                tabC[b-20].Boisson2 = 0;
+                            } 
+                            if(tabC[b-20].Boisson3 < 0){
+                                tabC[b-20].Boisson3 = 0;
+                            }
+                            panier[j].Boisson = 4441;      
                         }
-                        if (tabC[b-20].Boisson3 < 0){
-                            printf("\nPas assez de stock pour le %s\n", tabC[b-20].nom);
-                            tabC[b-20].Boisson3 = 0;
-                            panier[j].Boisson = 4441;
-                        }        
                     }
                     return b;
                 }else{
@@ -220,7 +220,7 @@ void print(BoissonNonAlcoolisee tabA[N1],BoissonAlcoolisee tabB[N1]){
  */
 
 int commande_cocktail(BoissonNonAlcoolisee tabA[N1],BoissonAlcoolisee tabB[N1], panier panier[30], int numerococktail){
-    int nombre, b, compteur, taillecocktail = 30, limite;
+    int nombre, b, compteur, taillecocktail, limite;
     float prix = 0;
     int stock = 0;
 
@@ -261,11 +261,23 @@ int commande_cocktail(BoissonNonAlcoolisee tabA[N1],BoissonAlcoolisee tabB[N1], 
         }      
     }
     system("cls");
+    printf("Vous pouvez creer un cocktail d'une contenance maximale de 30 cl\n");
+    /*On initialise le panier avec le choix de chaque boisson présente dans le cocktail*/
     panier[numerococktail-1].Cocktail.Boisson1 = ChoixMix[0];
     panier[numerococktail-1].Cocktail.Boisson2 = ChoixMix[1];
     panier[numerococktail-1].Cocktail.Boisson3 = ChoixMix[2];
     panier[numerococktail-1].Cocktail.numcocktail = numerococktail;
-    for (int j = 0; j<verif; j++){
+    for (int j = 0; j<verif; j++){ //On définit la quantité de cl maximale pour chaque boisson selon si on choisit un mix de 2 ou 3 boissons
+        switch (verif){
+            case 2 :
+                taillecocktail = 15;
+            break;
+            case 3 :
+                taillecocktail = 10;
+            break;
+            default :
+            break;
+        }
         /*L'utilisateur choisit la quantité de chaque boisson pour son cocktail */
         b = ChoixMix[j];
         if (b>9 && b<20){
@@ -273,13 +285,11 @@ int commande_cocktail(BoissonNonAlcoolisee tabA[N1],BoissonAlcoolisee tabB[N1], 
 
             printf("\nCombien de cl de %s souhaitez-vous dans votre cocktail [%d cl restants]\n", tabB[b-10].nom, taillecocktail);
             scanf("%d", &stock);
-            tabB[b-10].stock = tabB[b-10].stock - stock;
             limite = taillecocktail - stock; 
             if(limite < 0){ // Ajustement si la quantité choisi depasse le stockcocktail disponible
                 printf("\nVous avez ajoute trop de %s, la quantite a ete ajustee a celle disponible\n", tabB[b-10].nom);
-                tabB[b-10].stockcocktail = tabA[b].stockcocktail - taillecocktail;
+                tabB[b-10].stockcocktail = tabB[b-10].stockcocktail - taillecocktail;
             }else{
-                taillecocktail = taillecocktail - stock;
                 tabB[b-10].stockcocktail = tabB[b-10].stockcocktail - stock;
             }
             prix = prix + tabB[b-10].prix; // Ajout du prix de la boisson dans le prix total du cocktail
@@ -288,13 +298,11 @@ int commande_cocktail(BoissonNonAlcoolisee tabA[N1],BoissonAlcoolisee tabB[N1], 
 
             printf("\nCombien de cl de %s souhaitez-vous dans votre cocktail [%d cl restants]\n", tabA[b].nom, taillecocktail);
             scanf("%d", &stock);
-            tabA[b].stock = tabA[b].stock - stock;
             limite = taillecocktail - stock;
             if(limite < 0){ // Ajustement si la quantité choisi depasse le stockcocktail disponible
                 printf("\nVous avez ajoute trop de %s, la quantite a ete ajustee a celle disponible\n", tabA[b].nom);
                 tabA[b].stockcocktail = tabA[b].stockcocktail - taillecocktail;
             }else{
-                taillecocktail = taillecocktail - stock;
                 tabA[b].stockcocktail = tabA[b].stockcocktail - stock;
             }
             prix = prix + tabA[b].prix; // Ajout du prix de la boisson dans le prix total du cocktail 

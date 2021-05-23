@@ -5,7 +5,6 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
 #define N1 10
 
 
@@ -373,6 +372,7 @@ void initialisationCocktail(BoissonNonAlcoolisee tabA[N1], BoissonAlcoolisee tab
     if (recup != 1){
         pinacolada.Boisson1 = tabA[2].stockcocktail;
         pinacolada.Boisson2 = tabB[2].stockcocktail;
+        pinacolada.Boisson3 = 1;
     }else{
         if(b == 21){
         tabA[2].stockcocktail = tabC[1].Boisson1;
