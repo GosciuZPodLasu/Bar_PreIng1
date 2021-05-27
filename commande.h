@@ -121,7 +121,7 @@ int commande(BoissonNonAlcoolisee tabA[N1], BoissonAlcoolisee tabB[N1], Cocktail
                     if (b == 21){
                         tabC[b-20].Boisson1 = tabC[b-20].Boisson1 - 15;
                         tabC[b-20].Boisson2 = tabC[b-20].Boisson2 - 15;
-                        if (tabC[b-20].Boisson1 < 0 || tabC[b-20].Boisson2){
+                        if (tabC[b-20].Boisson1 < 0 || tabC[b-20].Boisson2 < 0){
                             printf("\nPas assez de stock pour le %s\n", tabC[b-20].nom);
                             if(tabC[b-20].Boisson1 < 0){
                                 tabC[b-20].Boisson1 = 0;
@@ -135,7 +135,7 @@ int commande(BoissonNonAlcoolisee tabA[N1], BoissonAlcoolisee tabB[N1], Cocktail
                         tabC[b-20].Boisson1 = tabC[b-20].Boisson1 - 10;
                         tabC[b-20].Boisson2 = tabC[b-20].Boisson2 - 10;
                         tabC[b-20].Boisson3 = tabC[b-20].Boisson3 - 10;
-                        if (tabC[b-20].Boisson1 < 0 || tabC[b-20].Boisson2 || tabC[b-20].Boisson3 < 0){
+                        if (tabC[b-20].Boisson1 < 0 || tabC[b-20].Boisson2 < 0 || tabC[b-20].Boisson3 < 0){
                             printf("\nPas assez de stock pour le %s\n", tabC[b-20].nom);
                             if(tabC[b-20].Boisson1 < 0){
                                 tabC[b-20].Boisson1 = 0;
